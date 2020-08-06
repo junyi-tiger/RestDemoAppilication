@@ -13,12 +13,10 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class Clazz {
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
-    @Column(name = "clazz_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clazzId;
 
     @NotBlank(message = "班级名称不能为空")
-    @Column(name = "clazz_name")
     private String clazzName;
 
 }

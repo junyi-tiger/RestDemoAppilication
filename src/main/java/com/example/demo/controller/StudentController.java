@@ -9,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,24 +24,22 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @GetMapping("/all")
+    public List<Student> all(){
+        return studentService.all();
+    }
+
     @PostMapping(value = "/save")
-    public Student saveStudent(@Valid @RequestBody Student student, BindingResult bindingResult){
+    public Student save(@Valid Student student, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(e -> {
                 FieldError fieldError = (FieldError) e;
                 log.info(fieldError.getDefaultMessage());
             });
         }
-        return studentService.addStudent(student);
-    }
-
-    @GetMapping("/all")
-    public List<Student> all(){
-        return studentService.getAllStudent();
-    }
-
-    @RequestMapping(value = "/say_hello")
-    public String sayHello(){
-        return "hello world!";
+        log.info("student:{}",student);
+        Date date = student.getStudentBirthday();
+        log.info("studentBirthday:{}", date);
+        return studentService.save(student);
     }
 }

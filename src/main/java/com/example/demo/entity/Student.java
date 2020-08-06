@@ -7,8 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -17,15 +15,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class Student {
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
-    @Column(name = "student_id")
-    private Long studentID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long studentId;
 
     @NotBlank(message = "学生姓名不能为空！")
-    @Column(name = "student_name")
     private String studentName;
 
-    @Column(name = "student_birthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date studentBirthday;
 
     @ManyToOne(targetEntity = Clazz.class, cascade = CascadeType.PERSIST)
