@@ -18,10 +18,10 @@ import java.util.*;
  */
 @SpringBootApplication
 @Slf4j
-public class DemoApplication {
+public class RestDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(RestDemoApplication.class, args);
 	}
 
 	@Bean
